@@ -1,0 +1,17 @@
+hyprland
+niri
+waybar
+wofi
+kitty
+starship
+fish
+mako
+hyprlock
+hypridle
+hyprpolkitagent
+swww
+waypaper
+cliphist
+udiskie
+nm-applet
+wob

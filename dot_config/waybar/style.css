@@ -1,0 +1,176 @@
+/* -----------------------------------------------------------------------------
+ * Estilos Waybar
+ * -------------------------------------------------------------------------- */
+
+* {
+    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "FontAwesome", Roboto, sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    min-height: 0;
+}
+
+
+#waybar {
+    background-color: #111827; /* Fundo escuro */
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    border-bottom: 2px solid #282828;
+}
+
+/* -----------------------------------------------------------------------------
+ * Workspaces
+ * -------------------------------------------------------------------------- */
+#workspaces {
+    background-color: transparent;
+    margin: 0px 4px;
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 2px;
+    background-color: transparent;
+    color: #aaaaaa; /* Cor inativa mais suave */
+    border-radius: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+#workspaces button.active {
+    background-color: #282828;
+    color: #ffffff;
+    border-bottom: 2px solid #00b093; /* Verde CachyOS */
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+    color: #ffffff;
+}
+
+/* -----------------------------------------------------------------------------
+ * Módulos Gerais - Estrutura Fina
+ * -------------------------------------------------------------------------- */
+#clock, #battery, #cpu, #memory, #disk, #temperature,
+#backlight, #network, #pulseaudio, #wireplumber, #tray,
+#mode, #idle_inhibitor, #bluetooth, #custom-power, 
+#custom-spotify, #custom-storage, #power-profiles-daemon {
+    padding: 0px 8px;   /* Mantém a barra fina */
+    margin: 0px;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * Cores Específicas para cada Módulo
+ * -------------------------------------------------------------------------- */
+
+/* Relógio - Azul claro gelo */
+#clock {
+    color: #c8d2e0;
+}
+
+/* CPU - Vermelho/Salmão */
+#cpu {
+    color: #fb958b;
+}
+
+/* Memória - Amarelo */
+#memory {
+    color: #ebcb8b;
+}
+
+/* Disco/Storage - Laranja */
+#custom-storage, #disk {
+    color: #efd6b9;
+}
+
+/* Áudio - Azul */
+#pulseaudio, #wireplumber {
+    color: #7d9bba;
+}
+
+/* Rede - Roxo/Rosa */
+#network {
+    color: #b48ead;
+}
+
+#network.disconnected {
+    color: #f53c3c;
+}
+
+/* Bluetooth - Azul acinzentado */
+#bluetooth {
+    color: #707d9d;
+}
+
+/* Brilho - Ciano esverdeado */
+#backlight {
+    color: #8fbcbb;
+}
+
+/* Bateria - Variável */
+#battery {
+    color: #c0caf5;
+}
+#battery.charging, #battery.plugged {
+    color: #14d866; /* Verde carregando */
+}
+#battery.critical:not(.charging) {
+    color: #f53c3c; /* Vermelho crítico */
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#custom-launcher {
+    background-image: url("icon-cachyos.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* Reduza este valor para diminuir o ícone (ex: 55%) */
+    background-size: 55%; 
+    
+    color: @primary; 
+    background-color: transparent; 
+    
+    /* Diminuir o padding e a largura mínima também ajuda na proporção */
+    padding-left: 10px; 
+    
+    margin-left: 0px;
+    margin-right: 0px;
+
+    min-width: 24px; 
+ 
+}
+
+#custom-launcher:hover {
+    background-color: @on_primary_container;
+    
+}
+/* Spotify - Verde oficial */
+#custom-spotify {
+    color: #1db954;
+}
+
+/* Botão Power - Vermelho */
+#custom-power {
+    color: #f53c3c;
+    padding-right: 12px;
+}
+
+/* Tray (Ícones da bandeja) */
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+}
+
+@keyframes blink {
+    to { color: #ffffff; }
+}
