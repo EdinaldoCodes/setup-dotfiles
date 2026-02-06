@@ -15,7 +15,7 @@
     "modules-left": [
         //"custom/rofi",
         "custom/launcher",
-        "hyprland/workspaces",
+        "niri/workspaces",
         //"hyprland/submap",
         // "temperature",
         //"idle_inhibitor",
