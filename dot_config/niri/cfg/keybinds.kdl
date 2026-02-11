@@ -1,28 +1,43 @@
 binds {
-    // ────────────── Keybindings (Versão Final Restaurada) ──────────────
+    // ────────────── Keybindings  ──────────────
 
     // ─── Ajuda / Overlay ───
     MOD+SHIFT+ESCAPE { show-hotkey-overlay; }
 
     // ─── Aplicativos ───
-    MOD+RETURN      { spawn "alacritty"; }
-    MOD+CTRL+RETURN { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
-    MOD+SPACE       { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    MOD+RETURN      { spawn "kitty"; }
+    MOD+T           { spawn "kitty"; }
     MOD+B           { spawn "firefox"; }
-    MOD+E           { spawn "nautilus"; }
-    MOD+ALT+L       { spawn-sh "qs -c noctalia-shell ipc call lockScreen lock"; }
+    MOD+E           { spawn "dolphin"; }
+    //MOD+SPACE     { spawn "wofi"; }
+    MOD+SPACE       { spawn "rofi" "-show" "drun" "-show-icons"; }
+    MOD+Y           { spawn "spotify-launcher"; }
+    Mod+W           { spawn-sh "~/.config/waybar/selector.sh"; }
+
+    // ─── Scripts ───
+    // Papel de parede aleatório
+    MOD+SHIFT+W     { spawn-sh "swww img --transition-type grow --transition-duration 2 $(find /home/edinaldo/Imagens/wallpapers -type f \\( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' \\) | shuf -n 1)"; }
+
 
     // ─── Controles Multimídia ───
-    XF86AUDIORAISEVOLUME  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
-    XF86AUDIOLOWERVOLUME  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
-    XF86AUDIOMUTE         allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
-    XF86MONBRIGHTNESSUP   allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness increase"; }
-    XF86MONBRIGHTNESSDOWN allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call brightness decrease"; }
+    // Volume (com OSD wob)
+    XF86AUDIORAISEVOLUME allow-when-locked=true { spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\\d+(?=%)' | head -1 > /tmp/wob"; }
+    XF86AUDIOLOWERVOLUME allow-when-locked=true { spawn-sh "pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\\d+(?=%)' | head -1 > /tmp/wob"; }
+    XF86AUDIOMUTE        allow-when-locked=true { spawn-sh "pactl set-sink-mute @DEFAULT_SINK@ toggle && (pactl get-sink-mute @DEFAULT_SINK@ | grep -q 'yes' && echo 0 || pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\\d+(?=%)' | head -1) > /tmp/wob"; }
 
+    // Brilho
+    XF86MONBRIGHTNESSUP   allow-when-locked=true { spawn-sh "brightnessctl s +5%"; }
+    XF86MONBRIGHTNESSDOWN allow-when-locked=true { spawn-sh "brightnessctl s 5%-"; }
+
+    // Noctalia-shell (volume/brilho) - desativado
+    // XF86AUDIORAISEVOLUME  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume increase"; }
+    // XF86AUDIOLOWERVOLUME  allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume decrease"; }
+    // XF86AUDIOMUTE         allow-when-locked=true { spawn-sh "qs -c noctalia-shell ipc call volume muteOutput"; }
+ 
     // ─── Janelas (Básico) ───
     MOD+Q { close-window; }
     
-    // [RESTAURADO] Visão Geral (Overview)
+    // Visão Geral (Overview)
     MOD+O { toggle-overview; }
 
     // ─── FOCO (Navegação) ───
@@ -38,14 +53,14 @@ binds {
     MOD+CTRL+UP    { move-window-up; }
     MOD+CTRL+DOWN  { move-window-down; }
 
-    // ─── EMPILHAMENTO (Stacking) - ADICIONADO ───
+    // ─── EMPILHAMENTO (Stacking) ───
     // Permite colocar uma janela em cima/baixo da outra na mesma coluna
     
     // Consumir (Juntar) janela na coluna
     MOD+COMMA  { consume-window-into-column; }
     MOD+PERIOD { expel-window-from-column; }
     
-    // Opção alternativa com Colchetes (comum em setups Niri)
+    // Opção alternativa com Colchetes (comum em setups Niri) - Analisar
     MOD+BRACKETLEFT  { consume-or-expel-window-left; }
     MOD+BRACKETRIGHT { consume-or-expel-window-right; }
 
@@ -60,16 +75,24 @@ binds {
     MOD+3 { focus-workspace 3; }
     MOD+4 { focus-workspace 4; }
     MOD+5 { focus-workspace 5; }
+    MOD+6 { focus-workspace 6; }
+    MOD+7 { focus-workspace 7; }
+    MOD+8 { focus-workspace 8; }
+    MOD+9 { focus-workspace 9; }
 
-    MOD+CTRL+1 { move-column-to-workspace 1; }
-    MOD+CTRL+2 { move-column-to-workspace 2; }
-    MOD+CTRL+3 { move-column-to-workspace 3; }
-    MOD+CTRL+4 { move-column-to-workspace 4; }
-    MOD+CTRL+5 { move-column-to-workspace 5; }
+    MOD+SHIFT+1 { move-column-to-workspace 1; }
+    MOD+SHIFT+2 { move-column-to-workspace 2; }
+    MOD+SHIFT+3 { move-column-to-workspace 3; }
+    MOD+SHIFT+4 { move-column-to-workspace 4; }
+    MOD+SHIFT+5 { move-column-to-workspace 5; }
+    MOD+SHIFT+6 { move-column-to-workspace 6; }
+    MOD+SHIFT+7 { move-column-to-workspace 7; }
+    MOD+SHIFT+8 { move-column-to-workspace 8; }
+    MOD+SHIFT+9 { move-column-to-workspace 9; }
 
     MOD+TAB { focus-workspace-previous; }
 
-    // ─── MOUSE SCROLL (Restaurado) ───
+    // ─── MOUSE SCROLL ───
     // Rolar para trocar workspace
     MOD+WHEELSCROLLDOWN      cooldown-ms=150 { focus-workspace-down; }
     MOD+WHEELSCROLLUP        cooldown-ms=150 { focus-workspace-up; }
@@ -79,8 +102,11 @@ binds {
     MOD+CTRL+WHEELSCROLLUP   cooldown-ms=150 { move-column-to-workspace-up; }
 
     // Rolar lateral (se houver) ou Shift+Scroll para navegar nas colunas
-    MOD+WHEELSCROLLRIGHT     { focus-column-right; }
-    MOD+WHEELSCROLLLEFT      { focus-column-left; }
+    MOD+WHEELSCROLLRIGHT      { focus-column-right; }
+    MOD+WHEELSCROLLLEFT       { focus-column-left; }
+
+    MOD+SHIFT+WHEELSCROLLUP   { focus-column-left; }
+    MOD+SHIFT+WHEELSCROLLDOWN { focus-column-right; }
 
     // ─── MONITORES ───
     MOD+ALT+LEFT  { focus-monitor-left; }
@@ -89,10 +115,10 @@ binds {
     MOD+ALT+DOWN  { focus-monitor-down; }
 
     // ─── Layout e Tamanho ───
-    MOD+T { toggle-window-floating; }
-    MOD+C { center-column; }
+    MOD+SHIFT+T { toggle-window-floating; } // Terminal 
+    MOD+C { center-column; } // Desnecessário
 
-    // [INVERTIDO] F = Maximizar, M = Fullscreen
+    // F = Maximizar, M = Fullscreen
     MOD+F { maximize-column; } 
     MOD+M { fullscreen-window; } 
 

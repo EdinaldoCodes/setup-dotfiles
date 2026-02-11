@@ -1,0 +1,212 @@
+/* -----------------------------------------------------------------------------
+ * Estilos Waybar
+ * -------------------------------------------------------------------------- */
+
+* {
+    border: none;
+    
+    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "FontAwesome", Roboto, sans-serif;
+    /* font-family: "Adwaita Sans", "JetBrainsMono Nerd Font Propo", "sans-serif"; */
+    font-weight: 600;
+    /* font-weight: bold; */
+
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+
+#waybar {
+    background-color: #111827; /* Fundo escuro */
+    color: #ffffff;
+    transition-property: background-color;
+    transition-duration: 0.5s;
+    border-bottom: 2px solid #282828;
+}
+
+/* -----------------------------------------------------------------------------
+ * Workspaces
+ * -------------------------------------------------------------------------- */
+#workspaces {
+    background-color: transparent;
+    padding: 5px 3px;
+    /* margin: 0px 4px; */
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 2px;
+    background-color: transparent;
+    color: #aaaaaa; /* Cor inativa mais suave */
+    border-radius: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+#workspaces button.active {
+    background-color: #282828;
+    color: #ffffff;
+    border-bottom: 2px solid #00b093; /* Verde CachyOS */
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+    color: #ffffff;
+}
+
+/* -----------------------------------------------------------------------------
+ * Módulos Gerais - Estrutura Fina
+ * -------------------------------------------------------------------------- */
+#clock, #battery, #cpu, #memory, #disk, #temperature,
+#backlight, #network, #pulseaudio, #wireplumber, #tray,
+#mode, #idle_inhibitor, #bluetooth, #custom-power, 
+#custom-spotify, #custom-storage, #power-profiles-daemon {
+    padding: 0px 8px;   /* Mantém a barra fina */
+    margin: 0px;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+/* -----------------------------------------------------------------------------
+ * Cores Específicas para cada Módulo
+ * -------------------------------------------------------------------------- */
+
+/* Relógio - Azul claro gelo */
+#clock {
+    color: #c8d2e0;
+}
+
+/* CPU - Vermelho/Salmão */
+#cpu {
+    color: #fb958b;
+}
+
+/* Memória - Amarelo */
+#memory {
+    color: #ebcb8b;
+}
+
+/* Disco/Storage - Laranja */
+#custom-storage, #disk {
+    color: #efd6b9;
+}
+
+/* Áudio - Azul */
+#pulseaudio, #wireplumber {
+    color: #7d9bba;
+}
+
+/* Rede - Roxo/Rosa */
+#network {
+    color: #b48ead;
+}
+
+#network.disconnected {
+    color: #f53c3c;
+}
+
+/* Bluetooth - Azul acinzentado */
+#bluetooth {
+    color: #707d9d;
+}
+
+/* Brilho - Ciano esverdeado */
+#backlight {
+    color: #8fbcbb;
+}
+
+/* Bateria - Variável */
+#battery {
+    color: #c0caf5;
+}
+#battery.charging, #battery.plugged {
+    color: #14d866; /* Verde carregando */
+}
+#battery.critical:not(.charging) {
+    color: #f53c3c; /* Vermelho crítico */
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+#custom-launcher {
+    background-image: url("icon-cachyos.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    
+    /* Reduza este valor para diminuir o ícone (ex: 55%) */
+    background-size: 55%; 
+    
+    color: @primary; 
+    background-color: transparent; 
+    
+    /* Diminuir o padding e a largura mínima também ajuda na proporção */
+    padding-left: 10px; 
+    
+    margin-left: 0px;
+    margin-right: 0px;
+
+    min-width: 24px; 
+ 
+}
+
+#custom-launcher:hover {
+    background-color: @on_primary_container;
+    
+}
+/* Spotify - Verde oficial */
+#custom-spotify {
+    color: #1db954;
+}
+
+/* Botão Power - Vermelho */
+#custom-power {
+    color: #f53c3c;
+    padding-right: 12px;
+}
+
+/* Estilo do Grupo (Container da gaveta) */
+#group-tray-drawer {
+    background-color: #1e1e2e; /* Cor do fundo da sua barra */
+    border-radius: 15px;
+    margin: 0px 5px;
+    padding: 0px 5px;
+}
+
+/* Quando a gaveta está ABERTA */
+#group-tray-drawer.drawer-child {
+    background-color: #313244; /* Uma cor levemente mais clara para destacar */
+    transition: all 0.5s ease;
+}
+
+/* O Ícone Gatilho (A setinha) */
+#custom-tray-icon {
+    color: #cdd6f4;
+    padding: 0 10px;
+    font-size: 16px;
+}
+
+/* A Tray em si */
+#tray {
+    padding: 0 10px;
+}
+
+/* Opcional: Remover ícones que você NUNCA quer ver */
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    /* background-color: #f38ba8; */
+    background-color: #eb4d4b;
+}
+
+
+@keyframes blink {
+    to { color: #ffffff; }
+}

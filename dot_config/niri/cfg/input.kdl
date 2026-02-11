@@ -4,9 +4,11 @@
 input {
     keyboard {
         xkb {
-            layout "br" // Use the American keyboard layout
+            layout "br" 
             variant "abnt2"
         }
+        repeat-rate 50
+        repeat-delay 300
         
         numlock // Enable numlock on startup
         
