@@ -1,0 +1,31 @@
+    1 # Arquivos de ambiente
+    2 .env
+    3 .env.*
+    4 !.env.example
+    5
+    6 # Chaves de API
+    7 *.key
+    8 *.pem
+    9 *.p12
+   10 *.crt
+   11 *.cert
+   12 *.secrets
+   13
+   14 # Logs e arquivos temporários
+   15 *.log
+   16 tmp/
+   17 temp/
+   18
+   19 # Arquivos de configuração de IDEs e editores
+   20 .idea/
+   21 .vscode/
+   22 *.swp
+   23 *.swo
+   24
+   25 # Dependências de pacotes e diretórios de build comuns (e
+   26 node_modules/
+   27 dist/
+   28 build/
+   29 out/
+   30 target/ # Para projetos Java/Rust
+   31 venv/ # Para ambientes virtuais Python
