@@ -2,46 +2,52 @@
     // -------------------------------------------------------------------------
     // Global configuration
     // -------------------------------------------------------------------------
-
-    "layer": "top",
     "position": "top",
-    "margin-top": 0,
+    "margin-top": 5,
+    "margin-bottom": 0,
+    "margin-left": 600,
+    "margin-right": 600,
     "height": 30,
-    "spacing": 0, // Gaps between modules (4px)
-
+    "spacing": 1, // Gaps between modules (4px)
     "modules-left": [
-        //"custom/rofi",
+        //"custom/rofi"
+        "custom/spacer"
         //"custom/launcher",
-        "niri/workspaces"
+        //"niri/workspaces"
         // "temperature",
         //"idle_inhibitor",
         //"mpd"
         //"custom/spotify"
-
     ],
     "modules-center": [
-        "clock#date"
         //"custom/gammastep"
+        "clock#3",
+        "niri/workspaces",
+        "network",
+        "pulseaudio",
+        "battery"
+
+
     ],
     "modules-right": [
+        "custom/spacer"
         //"backlight",
-        "custom/storage",
-        "memory",
+        //"custom/storage",
+        //"memory",
         //"cpu",
-        "battery",
-        "network",
-	    //"power-profiles-daemon",
-        "pulseaudio",
+        //"pulseaudio",
+        //"network",
+        //"power-profiles-daemon",
+        //"battery",
         //"wireplumber",
         //"custom/screenshot_t",
         //"bluetooth",
-        "group/tray-drawer",
-        "custom/notification",
-        "custom/power"
-       
+        //"group/tray-drawer",
+        //"clock#3",
+        //"custom/notification",
+        //"custom/power"
+        
     ],
-
-
     // -------------------------------------------------------------------------
     // Modules
     // -------------------------------------------------------------------------
@@ -59,8 +65,6 @@
         "format": " |",
         "tooltip": false
     },
-
-
     "custom/rofi": {
         "format": "",
         "tooltip": false,
@@ -68,12 +72,11 @@
         "on-click": "wofi --show run",
         "on-click-middle": "pkill -9 wofi"
     },
-    "custom/screenshot_t":{
-        "format":" ",
+    "custom/screenshot_t": {
+        "format": " ",
         "on-click": "~/.config/hypr/scripts/screenshot_full",
-        "on-click-right":"~/.config/hypr/scripts/screenshot_area"
+        "on-click-right": "~/.config/hypr/scripts/screenshot_area"
     },
-
     "clock#1": {
         "format": " {:%a}",
         "tooltip": false,
@@ -85,19 +88,17 @@
         "on-click": "gsimplecal"
     },
     "clock#3": {
-        "format": " {:%H:%M:%S %p}",
+        "format": "{:%H:%M %p}",
         "tooltip": false,
         "on-click": "gsimplecal"
     },
-
     "memory": {
         "interval": 30,
-        "format": "  {used:0.2f} / {total:0.0f} GB",
-        "format-alt": "  {percentage}% ",
+        "format": "  {percentage}% ",
+        "format-alt": "  {used:0.2f} / {total:0.0f} GB",
         "format-alt-click": "click-right",
         "on-click": "kitty -e btop"
     },
-
     "battery": {
         "interval": 2,
         "states": {
@@ -127,21 +128,23 @@
         "interval": 5
     },
     "custom/storage": {
-        "format": " {}",
-        "format-alt": " {percentage}%",
+        "format": " {percentage}%",
+        "format-alt": " {}",
         "format-alt-click": "click-right",
         "return-type": "json",
         "interval": 60,
         "exec": "~/.config/waybar/modules/storage.sh"
     },
-
     "backlight": {
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
         "format-alt": "{percent}% {icon}",
         "format-alt-click": "click-right",
         //"format-icons": ["", ""],
-        "format-icons": ["", ""],
+        "format-icons": [
+            "",
+            ""
+        ],
         "on-scroll-down": "brightnessctl s 5%-",
         "on-scroll-up": "brightnessctl s +5%"
     },
@@ -165,24 +168,22 @@
     },
     "custom/pacman": {
         "format": "<big>􏆲</big>  {}",
-        "interval": 3600,                     // every hour
-        "exec": "checkupdates | wc -l",       // # of updates
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
+        "interval": 3600, // every hour
+        "exec": "checkupdates | wc -l", // # of updates
+        "exec-if": "exit 0", // always run; consider advanced run conditions
         "on-click": "kitty -e 'paru'; pkill -SIGRTMIN+8 waybar", // update system
         "signal": 8,
         "max-length": 5,
         "min-length": 3
     },
-
-     "custom/spotify": {
-         "exec": "~/.config/waybar/mediaplayer.py --player spotify",
-         "format": "{}  ",
-         "return-type": "json",
-         "on-click": "playerctl play-pause",
-         "on-scroll-up": "playerctl next",
-         "on-scroll-down": "playerctl previous"
-     },
-
+    "custom/spotify": {
+        "exec": "~/.config/waybar/mediaplayer.py --player spotify",
+        "format": "{}  ",
+        "return-type": "json",
+        "on-click": "playerctl play-pause",
+        "on-scroll-up": "playerctl next",
+        "on-scroll-down": "playerctl previous"
+    },
     "custom/media": {
         "format": "{0} {1}",
         "return-type": "json",
@@ -195,50 +196,45 @@
         //"exec": "~/.config/waybar/mediaplayer.py" // Script in resources folder
         // "exec": "~/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
-
     "custom/power": {
         "format": " 󰐥 ",
         "tooltip": false,
         "on-click": "wlogout"
     },
-
     "clock": {
         "format": "  {:%H:%M   %e %b}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "today-format": "<b>{}</b>"
     },
-
     "clock#date": {
-        "format": "{:%d de %b   %H:%M}",
+        "format": "{:%d de %b  %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "today-format": "<b>{}</b>"
     },
-
     "custom/gammastep": {
-      "interval": 5,
-      "return-type": "json",
-      "exec": {
-        "pre": "if unit_status=\"$(systemctl --user is-active gammastep)\"; then\nstatus=\"$unit_status ($(journalctl --user -u gammastep.service -g 'Period: ' | tail -1 | cut -d ':' -f6 | xargs))\"\nelse\nstatus=\"$unit_status\"\nfi",
-        "alt": "${status:-inactive}",
-        "tooltip": "Gammastep is $status",
-      },
-      "format": "{icon}",
-      "format-icons": {
-        "activating": "󰁪 ",
-        "deactivating": "󰁪 ",
-        "inactive": "? ",
-        "active (Night)": " ",
-        "active (Nighttime)": " ",
-        "active (Transition (Night)": " ",
-        "active (Transition (Nighttime)": " ",
-        "active (Day)": " ",
-        "active (Daytime)": " ",
-        "active (Transition (Day)": " ",
-        "active (Transition (Daytime)": " ",
-      },
-      "on-click": "systemctl --user is-active gammastep && systemctl --user stop gammastep || systemctl --user start gammastep",
+        "interval": 5,
+        "return-type": "json",
+        "exec": {
+            "pre": "if unit_status=\"$(systemctl --user is-active gammastep)\"; then\nstatus=\"$unit_status ($(journalctl --user -u gammastep.service -g 'Period: ' | tail -1 | cut -d ':' -f6 | xargs))\"\nelse\nstatus=\"$unit_status\"\nfi",
+            "alt": "${status:-inactive}",
+            "tooltip": "Gammastep is $status",
+        },
+        "format": "{icon}",
+        "format-icons": {
+            "activating": "󰁪 ",
+            "deactivating": "󰁪 ",
+            "inactive": "? ",
+            "active (Night)": " ",
+            "active (Nighttime)": " ",
+            "active (Transition (Night)": " ",
+            "active (Transition (Nighttime)": " ",
+            "active (Day)": " ",
+            "active (Daytime)": " ",
+            "active (Transition (Day)": " ",
+            "active (Transition (Daytime)": " ",
+        },
+        "on-click": "systemctl --user is-active gammastep && systemctl --user stop gammastep || systemctl --user start gammastep",
     },
-
     "cpu": {
         "interval": 1,
         //"format": " {}%", // Icon: microchip
@@ -246,7 +242,6 @@
         "max-length": 13,
         "min-length": 13
     },
-
     "mpd": {
         "max-length": 25,
         "format": "<span foreground='#bb9af7'></span> {title}",
@@ -261,7 +256,6 @@
         "smooth-scrolling-threshold": 5,
         "tooltip-format": "{title} - {artist} ({elapsedTime:%M:%S}/{totalTime:%H:%M:%S})"
     },
-
     "custom/title": {
         "format": "{}",
         "interval": 0,
@@ -269,12 +263,10 @@
         //"max-length": 35,
         "tooltip": false
     },
-
     "custom/title#name": {
         "format": "{}",
         "interval": 0,
         "return-type": "json",
-
         "max-length": 35,
         "exec": "$HOME/.scripts/title"
     },
@@ -298,12 +290,10 @@
         "sort-by-number": true,
         "active-only": false
     },
-
     "niri/window": {
         "max-length": 100,
         "separate-outputs": true
     },
-
     "pulseaudio": {
         "scroll-step": 3, // %, can be a float
         "format": "{icon} {volume}%", //
@@ -321,12 +311,15 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "on-click": "pavucontrol",
         "on-click-right": "amixer sset Master toggle"
     },
-
     "wireplumber": {
         "on-click": "pavucontrol",
         "on-click-right": "amixer sset Master toggle 1>/dev/null",
@@ -346,21 +339,25 @@
             "phone": " ",
             "portable": " ",
             "car": " ",
-            "default": [" ", " ", " "]
-        }
+            "default": [
+                " ",
+                " ",
+                " "
+            ]
+        },
     },
     "custom/notification": {
         "tooltip": false,
         "format": "{icon}",
         "format-icons": {
-        "notification": "<span foreground='red'><sup></sup></span>",
-        "none": "",
-        "dnd-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-none": "",
-        "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "inhibited-none": "",
-        "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-        "dnd-inhibited-none": ""
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
@@ -388,10 +385,9 @@
         },
         "modules": [
             "custom/tray-icon", // O ícone que fica sempre visível
-            "tray"              // A bandeja que fica escondida
+            "tray" // A bandeja que fica escondida
         ]
     },
-
     "custom/tray-icon": {
         "format": "  ",
         "tooltip": false
@@ -399,21 +395,27 @@
     "tray": {
         "icon-size": 18,
         "spacing": 8,
-        "ignore-list": ["nm-applet"] // Remove o nm-applet do tray
+        "ignore-list": [
+            "nm-applet"
+        ] // Remove o nm-applet do tray
         //"ignore": ["nm-applet"] 
         //"show-passive-items": true,
     },
 
-"power-profiles-daemon": {
-      "format": "{icon}",
-      "tooltip-format": "Perfil: {profile}\nDriver: {driver}",
-      "tooltip": true,
-      "format-icons": {
-        "default": "",     // Raio (Genérico)
-        "performance": "", // Raio (Performance)
-        "balanced": "",    // Balança (Equilibrado) 
-        "power-saver": "" // Folha (Economia)
+    "custom/spacer": {
+        "format": "",
+        "tooltip": false
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "Perfil: {profile}\nDriver: {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "", // Raio (Genérico)
+            "performance": "", // Raio (Performance)
+            "balanced": "", // Balança (Equilibrado) 
+            "power-saver": "" // Folha (Economia)
         }
     }
 }
-

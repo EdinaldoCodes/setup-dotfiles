@@ -41,7 +41,7 @@
         //"custom/screenshot_t",
         "bluetooth",
         "tray",
-        "custom/power",
+        "custom/power"
        
     ],
 
@@ -193,7 +193,7 @@
             "spotify": "",
             "default": "🎜"
         },
-        "escape": true,
+        "escape": true
         //"exec": "~/.config/waybar/mediaplayer.py" // Script in resources folder
         // "exec": "~/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
@@ -222,7 +222,7 @@
       "exec": {
         "pre": "if unit_status=\"$(systemctl --user is-active gammastep)\"; then\nstatus=\"$unit_status ($(journalctl --user -u gammastep.service -g 'Period: ' | tail -1 | cut -d ':' -f6 | xargs))\"\nelse\nstatus=\"$unit_status\"\nfi",
         "alt": "${status:-inactive}",
-        "tooltip": "Gammastep is $status",
+        "tooltip": "Gammastep is $status"
       },
       "format": "{icon}",
       "format-icons": {
@@ -236,7 +236,7 @@
         "active (Day)": " ",
         "active (Daytime)": " ",
         "active (Transition (Day)": " ",
-        "active (Transition (Daytime)": " ",
+        "active (Transition (Daytime)": " "
       },
       "on-click": "systemctl --user is-active gammastep && systemctl --user stop gammastep || systemctl --user start gammastep",
     },
@@ -293,12 +293,12 @@
             "7": "7",
             "8": "8",
             "9": "9",
-            "10": "10",
+            "10": "10"
         },
         "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
         "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
         "sort-by-number": true,
-        "active-only": false,
+        "active-only": false
     },
 
     "hyprland/window": {

@@ -2,41 +2,45 @@
     // -------------------------------------------------------------------------
     // Global configuration
     // -------------------------------------------------------------------------
-
+    "reload_style_on_change": true,
     "layer": "top",
     "position": "top",
     "margin-top": 0,
-    "height": 30,
+    "height": 26,
     "spacing": 0, // Gaps between modules (4px)
 
     "modules-left": [
-        //"custom/rofi",
+        // "custom/rofi",
         //"custom/launcher",
         "niri/workspaces"
         // "temperature",
-        //"idle_inhibitor",
-        //"mpd"
+        // "idle_inhibitor",
+        // "mpd",
         //"custom/spotify"
-
+        
     ],
     "modules-center": [
-        "clock#date"
-        //"custom/gammastep"
+        //"clock#3"
+        // "custom/gammastep",
+        "custom/spacing"
+        //"niri/window"
     ],
     "modules-right": [
         //"backlight",
-        "custom/storage",
-        "memory",
+        //"custom/storage",
+        //"memory",
         //"cpu",
-        "battery",
-        "network",
-	    //"power-profiles-daemon",
-        "pulseaudio",
+        "group/tray-expander",
         //"wireplumber",
+        "network",
+        "pulseaudio",
+	    //"power-profiles-daemon",
         //"custom/screenshot_t",
         //"bluetooth",
-        "group/tray-drawer",
-        "custom/notification",
+        //"group/tray-drawer",
+        "battery",
+        "clock#3",
+        //"custom/notification",
         "custom/power"
        
     ],
@@ -85,15 +89,17 @@
         "on-click": "gsimplecal"
     },
     "clock#3": {
-        "format": " {:%H:%M:%S %p}",
+        "format": "{:%H:%M %p}",
+        "format-alt":"{:%d %h %Y}",
+       
         "tooltip": false,
         "on-click": "gsimplecal"
     },
 
     "memory": {
         "interval": 30,
-        "format": "  {used:0.2f} / {total:0.0f} GB",
-        "format-alt": "  {percentage}% ",
+        "format": "  {percentage}% ",
+        "format-alt": "  {used:0.2f} / {total:0.0f} GB",
         "format-alt-click": "click-right",
         "on-click": "kitty -e btop"
     },
@@ -117,18 +123,18 @@
         ]
     },
     "network": {
-        "format-wifi": " {essid} ", //({signalStrength}%)
+        "format-wifi": " {essid}", //({signalStrength}%)
         "format-ethernet": " {ipaddr}/{cidr}",
         "format-linked": " {ifname} (No IP)",
-        "format-disconnected": " Disconnected",
+        "format-disconnected": "⚠ Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
         "on-click": "nm-connection-editor",
         "on-click-right": "nm-applet",
         "interval": 5
     },
     "custom/storage": {
-        "format": " {}",
-        "format-alt": " {percentage}%",
+        "format": " {percentage}%",
+        "format-alt": " {}",
         "format-alt-click": "click-right",
         "return-type": "json",
         "interval": 60,
@@ -209,7 +215,7 @@
     },
 
     "clock#date": {
-        "format": "{:%d de %b   %H:%M}",
+        "format": "{:%d de %b  %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "today-format": "<b>{}</b>"
     },
@@ -278,30 +284,16 @@
         "max-length": 35,
         "exec": "$HOME/.scripts/title"
     },
-    "niri/workspaces": {
-        "all-outputs": true,
-        "format": "{icon}",
-        "format-icons": {
-            "1": "1",
-            "2": "2",
-            "3": "3",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "8",
-            "9": "9",
-            "10": "10"
-        },
-        "on-scroll-up": "hyprctl dispatch workspace e+1 1>/dev/null",
-        "on-scroll-down": "hyprctl dispatch workspace e-1 1>/dev/null",
-        "sort-by-number": true,
-        "active-only": false
-    },
+"niri/workspaces": {
+    "format": "{icon}",
+    "on-scroll-up": "niri msg action focus-workspace-down",
+    "on-scroll-down": "niri msg action focus-workspace-up"
+},
 
-    "niri/window": {
-        "max-length": 100,
-        "separate-outputs": true
+"niri/window": {
+    "format": "{app_id}",
+    "separate-outputs": true,
+    "icon-size": 18
     },
 
     "pulseaudio": {
@@ -347,7 +339,7 @@
             "portable": " ",
             "car": " ",
             "default": [" ", " ", " "]
-        }
+        },
     },
     "custom/notification": {
         "tooltip": false,
@@ -378,24 +370,7 @@
         "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
         "on-click": "blueman-manager"
     },
-    // Adicione a configuração do grupo no corpo do JSON:
-    "group/tray-drawer": {
-        "orientation": "horizontal",
-        "drawer": {
-            "transition-duration": 500,
-            "children-class": "tray-child",
-            "transition-left-to-right": false
-        },
-        "modules": [
-            "custom/tray-icon", // O ícone que fica sempre visível
-            "tray"              // A bandeja que fica escondida
-        ]
-    },
-
-    "custom/tray-icon": {
-        "format": "  ",
-        "tooltip": false
-    },
+ 
     "tray": {
         "icon-size": 18,
         "spacing": 8,
@@ -414,6 +389,23 @@
         "balanced": "",    // Balança (Equilibrado) 
         "power-saver": "" // Folha (Economia)
         }
-    }
+    },
+
+"group/tray-expander": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 600,
+      "children-class": "tray-group-item"
+    },
+    "modules": ["custom/expand-icon", "tray"]
+  },
+  "custom/expand-icon": {
+    "format": "",
+    "tooltip": false,
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "on-scroll-left": "",
+    "on-scroll-right": ""
+  }
 }
 

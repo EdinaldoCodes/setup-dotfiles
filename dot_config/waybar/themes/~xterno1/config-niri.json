@@ -1,0 +1,193 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "height": 26,
+  "modules-left": ["niri/workspaces"],
+  "modules-center": ["clock", "custom/update", "custom/voxtype", "custom/screenrecording-indicator"],
+  "modules-right": [ 
+    "group/tray-expander",
+    // "bluetooth",
+    "network",
+    "pulseaudio",
+    // "cpu",
+    "battery",
+    "custom/power"
+    
+  ],
+  "niri/workspaces": {
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "8",
+      "9": "9",
+      "10": "0"
+    },
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    }
+  },
+  "custom/niri": {
+    "format": "<span font='niri'> 󰣇 </span>",
+    "on-click": "niri-menu",
+    "on-click-right": "xdg-terminal-exec",
+    "tooltip-format": "niri Menu\n\nSuper + Alt + Space"
+  },
+  "custom/update": {
+    "format": "",
+    "exec": "niri-update-available",
+    "on-click": "niri-launch-floating-terminal-with-presentation niri-update",
+    "tooltip-format": "niri update available",
+    "signal": 7,
+    "interval": 21600
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": "󰍛",
+    "on-click": "niri-launch-or-focus-tui btop",
+    "on-click-right": "kitty"
+  },
+"clock": {
+  "format": "󰥔 {:%d %b %H:%M}",  // 24h with date
+  // "format": "󰥔 {:L%A %d %b %H:%M}",  // 24h with date
+  "format-alt": "󰥔 {:L%A %d %b %I:%M %p}",   // 12h with date
+  "tooltip": false,
+  "on-click-right": "niri-launch-floating-terminal-with-presentation niri-tz-select"
+},
+ "network": {
+  "format-wifi": "󰤨 {essid}",
+  "format-ethernet": "󰀂 Wired",
+  "format-disconnected": "󰤮 Offline",
+  "tooltip-format-wifi": "{essid} ({signalStrength}%)\n⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+  "tooltip-format-ethernet": "Wired\n⇣{bandwidthDownBytes} ⇡{bandwidthUpBytes}",
+  "interval": 3,
+  "on-click": "niri-launch-wifi"
+},
+ "battery": {
+  "format": "{icon} {capacity}%",
+  "format-charging": "󰂄 {capacity}%",
+  "format-discharging": "{icon} {capacity}%",
+  "format-plugged": " {capacity}%",
+  "format-full": "󰂅 100%",
+  "format-icons": {
+    "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
+    "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+  },
+  "interval": 5,
+  "states": {
+    "warning": 20,
+    "critical": 10
+  }
+},
+ "bluetooth": {
+  "format": "󰂲",
+  "format-connected": "󰂱 {device_alias}",
+  "format-disabled": "󰂲",
+  "format-off": "󰂲",
+  "tooltip-format": "{device_alias}",
+  "on-click": "niri-launch-bluetooth"
+},
+ "pulseaudio": {
+  "format": "{icon} {volume}%",
+  "format-muted": " Muted",
+  "format-icons": {
+    "headphone": "",
+    "default": ["", "", ""]
+  },
+  "scroll-step": 5,
+  "on-click": "niri-launch-audio",
+  "on-click-right": "pamixer -t"
+},
+  "group/tray-expander": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 600,
+      "children-class": "tray-group-item"
+    },
+    "modules": ["custom/expand-icon", "tray"]
+  },
+  "custom/expand-icon": {
+    "format": "",
+    "tooltip": false,
+    "on-scroll-up": "",
+    "on-scroll-down": "",
+    "on-scroll-left": "",
+    "on-scroll-right": ""
+  },
+  "custom/screenrecording-indicator": {
+    "on-click": "niri-cmd-screenrecord",
+    "exec": "$niri_PATH/default/waybar/indicators/screen-recording.sh",
+    "signal": 8,
+    "return-type": "json"
+  },
+  "custom/voxtype": {
+    "exec": "niri-voxtype-status",
+    "return-type": "json",
+    "format": "{icon}",
+    "format-icons": {
+      "idle": "",
+      "recording": "󰍬",
+      "transcribing": "󰔟"
+    },
+    "tooltip": true,
+    "on-click-right": "niri-voxtype-config",
+    "on-click": "niri-voxtype-model"
+  },
+  "tray": {
+    "icon-size": 12,
+    "spacing": 17
+  },
+
+"custom/kernel": {
+  "exec": "uname -r | cut -d'-' -f1",
+  "interval": 3600,
+  "format": " {}"
+},
+"custom/nowplaying": {
+  "exec": "playerctl metadata --format '{{title}} — {{artist}}'",
+  "interval": 2,
+  "return-type": "string",
+  "format": " {}",
+  "max-length": 40,
+  "escape": true,
+  "tooltip": true,
+
+  "on-click": "~/.config/waybar/scripts/nowplaying-art.sh",
+  "on-click-right": "playerctl next",
+  "on-scroll-up": "playerctl volume 0.05+",
+  "on-scroll-down": "playerctl volume 0.05-"
+},
+"custom/brave": {
+  "format": "󰖟",
+  "tooltip": "Firefox Browser",
+  "on-click": "firefox",
+  "on-click-right": "pkill firefox"
+},
+
+"custom/code": {
+  "format": "󰨞",
+  "tooltip": "Visual Studio Code",
+  "on-click": "code",
+  "on-click-right": "pkill code"
+},
+
+"custom/power": {
+    "format": " 󰐥 ",
+    "tooltip": false,
+    "on-click": "wlogout"
+    }
+}

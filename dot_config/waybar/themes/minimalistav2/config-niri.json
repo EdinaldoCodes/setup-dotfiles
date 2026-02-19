@@ -7,7 +7,7 @@
     "position": "top",
     "margin-top": 0,
     "height": 30,
-    "spacing": 0, // Gaps between modules (4px)
+    "spacing": 1, // Gaps between modules (4px)
 
     "modules-left": [
         //"custom/rofi",
@@ -20,23 +20,24 @@
 
     ],
     "modules-center": [
-        "clock#date"
-        //"custom/gammastep"
+        //"clock#3"
+        "custom/gammastep"
     ],
     "modules-right": [
         //"backlight",
         "custom/storage",
         "memory",
         //"cpu",
-        "battery",
         "network",
-	    //"power-profiles-daemon",
         "pulseaudio",
+	    //"power-profiles-daemon",
+        "battery",
         //"wireplumber",
         //"custom/screenshot_t",
         //"bluetooth",
         "group/tray-drawer",
         "custom/notification",
+        "clock#3",
         "custom/power"
        
     ],
@@ -85,15 +86,15 @@
         "on-click": "gsimplecal"
     },
     "clock#3": {
-        "format": " {:%H:%M:%S %p}",
+        "format": "{:%H:%M %p}",
         "tooltip": false,
         "on-click": "gsimplecal"
     },
 
     "memory": {
         "interval": 30,
-        "format": "  {used:0.2f} / {total:0.0f} GB",
-        "format-alt": "  {percentage}% ",
+        "format": "  {percentage}% ",
+        "format-alt": "  {used:0.2f} / {total:0.0f} GB",
         "format-alt-click": "click-right",
         "on-click": "kitty -e btop"
     },
@@ -127,8 +128,8 @@
         "interval": 5
     },
     "custom/storage": {
-        "format": " {}",
-        "format-alt": " {percentage}%",
+        "format": " {percentage}%",
+        "format-alt": " {}",
         "format-alt-click": "click-right",
         "return-type": "json",
         "interval": 60,
@@ -209,7 +210,7 @@
     },
 
     "clock#date": {
-        "format": "{:%d de %b   %H:%M}",
+        "format": "{:%d de %b  %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "today-format": "<b>{}</b>"
     },
@@ -347,7 +348,7 @@
             "portable": " ",
             "car": " ",
             "default": [" ", " ", " "]
-        }
+        },
     },
     "custom/notification": {
         "tooltip": false,

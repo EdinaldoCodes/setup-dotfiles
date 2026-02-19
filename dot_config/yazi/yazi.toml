@@ -1,0 +1,40 @@
+[opener]
+# --- Editores ---
+edit = [
+    { run = 'micro "$@"', block = true, desc = "Abrir no Micro" },
+]
+
+# --- Notas ---
+obsidian = [
+    { run = 'obsidian "$1"', detach = true, desc = "Abrir no Obsidian" },
+]
+
+# --- Imagens ---
+imv = [
+    { run = 'imv "$@"', detach = true, desc = "Visualizador imv (Wayland)" },
+]
+gwenview = [
+    { run = 'gwenview "$@"', detach = true, desc = "Gwenview (KDE)" },
+]
+
+wallpaper = [
+    { run = 'swww img "$1" --transition-type center', detach = true, desc = "Definir como Papel de Parede" }
+]
+
+[open]
+rules = [
+    # IMAGENS
+    # O primeiro item ("gwenview") será o padrão ao dar Enter.
+    # Ao apertar SHIFT+O, o Yazi mostrará um menu para escolher entre imv e gwenview.
+    { mime = "image/*", use = ["gwenview", "imv", "wallpaper"] },
+
+    # TEXTO E CÓDIGO
+    { mime = "text/*", use = "edit" },
+
+    # MARKDOWN
+    # Aqui também: Enter abre no Micro, SHIFT+O deixa escolher Obsidian.
+    { name = "*.md", use = [ "edit", "obsidian" ] },
+
+    # FALLBACK (Para qualquer outro arquivo)
+    { name = "*", use = "edit" },
+]

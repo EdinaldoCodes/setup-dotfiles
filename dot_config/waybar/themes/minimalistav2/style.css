@@ -3,15 +3,16 @@
  * -------------------------------------------------------------------------- */
 
 * {
-    border: none;    
-    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "FontAwesome", Roboto, sans-serif;
-    /* font-family: "Adwaita Sans", "JetBrainsMono Nerd Font Propo", "sans-serif"; */
-    font-weight: 600;
-    /* font-weight: bold; */
+    border: none;
+    border-radius: 0px;
+    
+    font-family: "Adwaita Sans", "JetBrainsMono Nerd Font Propo", sans-serif;
+    font-weight: 700; 
+    font-size: 13px;
 
-    min-height: 0;
     padding: 0;
-    margin: 0;
+    margin:0;
+    min-height: 0;
 }
 
 
@@ -20,37 +21,47 @@
     color: #ffffff;
     transition-property: background-color;
     transition-duration: 0.5s;
+    
 }
 
 /* -----------------------------------------------------------------------------
  * Workspaces
  * -------------------------------------------------------------------------- */
 #workspaces {
-    background-color: transparent;
-    padding: 5px 3px;
-    margin: 0px 4px;
-}
-
-#workspaces button {
+    background-color: #1e1e2e; /* Cor de fundo da barra */
+    border-radius: 20px;
+    margin: 5px;
     padding: 0px 5px;
-    margin: 0px 2px;
-    background-color: transparent;
-    color: #aaaaaa; /* Cor inativa mais suave */
-    border-radius: 2px;
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
 }
 
+/* Estilo base para todas as "bolinhas" */
+#workspaces button {
+    padding: 0px;
+    background-color: #585b70; /* Cor das bolinhas inativas #fab387 | #585b70*/
+    color: transparent;
+    border-radius: 50%; /* Faz ser um círculo */
+    min-width: 18px;
+    min-height: 6px;
+    margin: 4px 4px;
+    border: none;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Efeito de hover opcional */
 #workspaces button:hover {
-    background: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
+    background-color: #f5e0dc;
 }
 
-#workspaces button.active {
-    background-color: #282828;
-    color: #ffffff;
-    border-bottom: 2px solid #00b093; /* Verde CachyOS */
-
+/* Estilo da bolinha ativa (a "pílula") */
+#workspaces button.active,
+#workspaces button.focused {
+    background-color: #8fbcbb; 
+    /* #a6e3a1 */
+    color: transparent;
+    border-radius: 10px;
+    min-width: 25px;
+    transition: all 0.3s ease-in-out;
 }
 
 #workspaces button.urgent {
@@ -141,7 +152,7 @@
     /* Reduza este valor para diminuir o ícone (ex: 55%) */
     background-size: 55%; 
     
-    color: @primary; 
+    color: #ffffff; /* @primary */
     background-color: transparent; 
     
     /* Diminuir o padding e a largura mínima também ajuda na proporção */
@@ -155,7 +166,7 @@
 }
 
 #custom-launcher:hover {
-    background-color: @on_primary_container;
+    background-color: #ffffff; /* @on_primary_container */
     
 }
 /* Spotify - Verde oficial */
@@ -169,43 +180,14 @@
     padding-right: 12px;
 }
 
-/* Estilo do Grupo (Container da gaveta) */
-#group-tray-drawer {
-    background-color: #1e1e2e; /* Cor do fundo da sua barra */
-    border-radius: 15px;
-    margin: 0px 5px;
-    padding: 0px 5px;
-}
-
-/* Quando a gaveta está ABERTA */
-#group-tray-drawer.drawer-child {
-    background-color: #313244; /* Uma cor levemente mais clara para destacar */
-    transition: all 0.5s ease;
-}
-
-/* O Ícone Gatilho (A setinha) */
-#custom-tray-icon {
-    color: #cdd6f4;
-    padding: 0 10px;
-    font-size: 16px;
-}
-
-/* A Tray em si */
-#tray {
-    padding: 0 10px;
-}
-
-/* Opcional: Remover ícones que você NUNCA quer ver */
+/* Tray (Ícones da bandeja) */
 #tray > .passive {
     -gtk-icon-effect: dim;
 }
-
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    /* background-color: #f38ba8; */
     background-color: #eb4d4b;
 }
-
 
 @keyframes blink {
     to { color: #ffffff; }

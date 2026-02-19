@@ -1,188 +1,121 @@
 /* -----------------------------------------------------------------------------
- * Estilos Waybar
+ * Estilos Waybar Minimalista ("Dot to Pill")
  * -------------------------------------------------------------------------- */
 
 * {
-    font-family: "Fira Sans Semibold", "Font Awesome 6 Free", "FontAwesome", Roboto, sans-serif;
-    font-weight: 600;
-    font-size: 13px;
+    border: none;
+    border-radius: 0px;
+    font-family: "JetBrainsMono Nerd Font", "Roboto", sans-serif;
+    font-weight: bold;
+    font-size: 15px;
     min-height: 0;
 }
 
-
-#waybar {
-    background-color: #111827; /* Fundo escuro */
-    color: #ffffff;
+window#waybar {
+    background-color: rgba(17, 24, 39, 0.95); /* Fundo escuro com leve transparência */
+    color: #cdd6f4;
     transition-property: background-color;
     transition-duration: 0.5s;
-    border-bottom: 2px solid #282828;
+    /* Se quiser a barra flutuante, descomente as linhas abaixo */
+    /* margin: 10px 10px 0 10px; */
+    /* border-radius: 12px; */
 }
 
 /* -----------------------------------------------------------------------------
- * Workspaces
+ * Workspaces - Estilo "Dot to Pill" (Igual à imagem)
  * -------------------------------------------------------------------------- */
 #workspaces {
-    background-color: #1e1e2e; /* Cor de fundo da barra */
-    border-radius: 20px;
-    margin: 5px;
-    padding: 0px 5px;
+    background-color: #1f2937; /* Um cinza levemente mais claro que a barra */
+    margin: 4px 6px;
+    padding: 2px 6px;          /* Padding interno para as bolinhas respirarem */
+    border-radius: 16px;       /* Arredondamento suave do container */
+    
+    /* Removemos a borda colorida que estava feia */
+    border: 1px solid rgba(255, 255, 255, 0.05); 
 }
 
-/* Estilo base para todas as "bolinhas" */
+/* O Botão (A bolinha inativa) */
 #workspaces button {
     padding: 0px;
-    background-color: #585b70; /* Cor das bolinhas inativas #fab387 | #585b70*/
-    color: transparent;
-    border-radius: 50%; /* Faz ser um círculo */
-    min-width: 18px;
-    min-height: 6px;
-    margin: 4px 4px;
-    border: none;
+    margin: 4px 3px;           /* Espaçamento entre as bolinhas */
+    border-radius: 10px;       /* Raio alto para garantir círculo */
+    background-color: #374151; /* Cinza médio (visível, mas discreto) */
+    color: transparent;        /* Esconde os números */
+    
+    /* GEOMETRIA FIXA - Isso impede o achatamento */
+    min-width: 22px;
+    min-height: 22px;
+    
     transition: all 0.3s ease-in-out;
+    box-shadow: none;          /* Remove sombras estranhas */
 }
 
-
-/* Efeito de hover opcional */
-#workspaces button:hover {
-    background-color: #f5e0dc;
-}
-
-/* Estilo da bolinha ativa (a "pílula") */
-#workspaces button.active,
-#workspaces button.focused {
-    background-color: #8fbcbb; 
-    /* #a6e3a1 */
+/* O Botão Ativo (A Pílula) */
+#workspaces button.active {
+    background-color: #89b4fa; /* Azul claro vibrante */
     color: transparent;
     border-radius: 10px;
-    min-width: 25px;
-    transition: all 0.3s ease-in-out;
+    
+    /* A pílula se estica na largura, mas mantém a altura */
+    min-width: 32px; 
+    min-height: 12px;
+}
+
+#workspaces button:hover {
+    background-color: #6b7280; /* Cinza mais claro ao passar o mouse */
 }
 
 #workspaces button.urgent {
-    background-color: #eb4d4b;
-    color: #ffffff;
+    background-color: #ef4444; /* Vermelho alerta */
 }
-
 /* -----------------------------------------------------------------------------
- * Módulos Gerais - Estrutura Fina
+ * Módulos Gerais - Limpeza Visual
  * -------------------------------------------------------------------------- */
 #clock, #battery, #cpu, #memory, #disk, #temperature,
 #backlight, #network, #pulseaudio, #wireplumber, #tray,
 #mode, #idle_inhibitor, #bluetooth, #custom-power, 
-#custom-spotify, #custom-storage, #power-profiles-daemon {
-    padding: 0px 8px;   /* Mantém a barra fina */
-    margin: 0px;
+#custom-spotify, #custom-storage {
+    padding: 0 12px;
     background-color: transparent;
-    border-radius: 0;
+    color: #cdd6f4; /* Texto unificado (Branco/Gelo) para minimalismo */
+    margin: 0;
 }
 
 /* -----------------------------------------------------------------------------
- * Cores Específicas para cada Módulo
+ * Ajustes Específicos e Ícones
  * -------------------------------------------------------------------------- */
 
-/* Relógio - Azul claro gelo */
-#clock {
-    color: #c8d2e0;
+/* Launcher */
+#custom-launcher {
+    color: #89b4fa; /* Apenas o ícone do sistema com cor de destaque */
+    font-size: 16px;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding: 0 6px;
 }
 
-/* CPU - Vermelho/Salmão */
-#cpu {
-    color: #fb958b;
-}
-
-/* Memória - Amarelo */
-#memory {
-    color: #ebcb8b;
-}
-
-/* Disco/Storage - Laranja */
-#custom-storage, #disk {
-    color: #efd6b9;
-}
-
-/* Áudio - Azul */
-#pulseaudio, #wireplumber {
-    color: #7d9bba;
-}
-
-/* Rede - Roxo/Rosa */
-#network {
-    color: #b48ead;
-}
-
-#network.disconnected {
-    color: #f53c3c;
-}
-
-/* Bluetooth - Azul acinzentado */
-#bluetooth {
-    color: #707d9d;
-}
-
-/* Brilho - Ciano esverdeado */
-#backlight {
-    color: #8fbcbb;
-}
-
-/* Bateria - Variável */
-#battery {
-    color: #c0caf5;
-}
+/* Bateria - Mudança de cor dinâmica apenas aqui */
 #battery.charging, #battery.plugged {
-    color: #14d866; /* Verde carregando */
+    color: #a6e3a1; /* Verde */
 }
 #battery.critical:not(.charging) {
-    color: #f53c3c; /* Vermelho crítico */
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-#custom-launcher {
-    background-image: url("icon-cachyos.svg");
-    background-repeat: no-repeat;
-    background-position: center;
-    
-    /* Reduza este valor para diminuir o ícone (ex: 55%) */
-    background-size: 55%; 
-    
-    color: #ffffff; /* @primary */
-    background-color: transparent; 
-    
-    /* Diminuir o padding e a largura mínima também ajuda na proporção */
-    padding-left: 10px; 
-    
-    margin-left: 0px;
-    margin-right: 0px;
-
-    min-width: 24px; 
- 
+    color: #f38ba8; /* Vermelho */
+    animation: blink 0.5s infinite alternate;
 }
 
-#custom-launcher:hover {
-    background-color: #ffffff; /* @on_primary_container */
-    
-}
-/* Spotify - Verde oficial */
-#custom-spotify {
-    color: #1db954;
-}
-
-/* Botão Power - Vermelho */
+/* Power Button */
 #custom-power {
-    color: #f53c3c;
-    padding-right: 12px;
+    color: #f38ba8;
+    margin-right: 10px;
 }
 
-/* Tray (Ícones da bandeja) */
-#tray > .passive {
-    -gtk-icon-effect: dim;
-}
-#tray > .needs-attention {
-    -gtk-icon-effect: highlight;
-    background-color: #eb4d4b;
+/* Tooltip (Opcional, para ficar bonito ao passar o mouse) */
+tooltip {
+    background: #1e1e2e;
+    border: 1px solid #313244;
 }
 
 @keyframes blink {
     to { color: #ffffff; }
 }
+

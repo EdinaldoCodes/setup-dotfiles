@@ -1,0 +1,234 @@
+/* ============================================================================
+   ISLAND WAYBAR THEME - MINIMALISTA CENTRALIZADO
+   ============================================================================ */
+
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: "Adwaita Sans", "JetBrainsMono Nerd Font Propo", sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    min-height: 0;
+}
+
+/* ============================================================================
+   BARRA PRINCIPAL
+   ============================================================================ */
+
+#waybar {
+    /* background-color: #111827; */
+    background-color: rgba(11, 8, 24, 0.8);
+    color: #ffffff;
+    transition: background-color 0.5s ease;
+    border-radius: 50px;
+}
+
+
+/* ============================================================================
+   SPACER (invisível na esquerda)
+   ============================================================================ */
+
+#custom-spacer {
+    padding: 0;
+    min-width: 0;
+    margin: 0;
+}
+
+/* ============================================================================
+   WORKSPACES (Centro - Foco Principal)
+   ============================================================================ */
+
+#workspaces {
+    background-color: #1e1e2e;
+    border-radius: 20px;
+    margin: 5px 10px;
+    padding: 0 8px;
+}
+
+#workspaces button {
+    padding: 0;
+    background-color: #585b70;
+    color: transparent;
+    border-radius: 50%;
+    min-width: 18px;
+    min-height: 6px;
+    margin: 4px;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0.6;
+}
+
+#workspaces button:hover {
+    background-color: #f5e0dc;
+    opacity: 0.9;
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+    background-color: #8fbcbb;
+    color: transparent;
+    border-radius: 10px;
+    min-width: 25px;
+    opacity: 1;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+    color: #ffffff;
+    animation: pulse 1s ease-in-out infinite;
+}
+
+/* ============================================================================
+   RELÓGIO (Centro)
+   ============================================================================ */
+
+#clock {
+    color: #c8d2e0;
+    padding: 0 12px;
+    margin: 0 5px;
+    font-size: 13px;
+}
+
+#clock#clock\#3 {
+    color: #c8d2e0;
+    padding: 0 12px;
+}
+
+/* ============================================================================
+   BATERIA (Centro)
+   ============================================================================ */
+
+#battery {
+    color: #c0caf5;
+    padding: 0 8px;
+    margin: 0 2px;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #14d866;
+}
+
+#battery.critical:not(.charging) {
+    color: #f53c3c;
+    animation: blink 0.5s ease-in-out infinite alternate;
+}
+
+/* ============================================================================
+   MÓDULOS GERAIS
+   ============================================================================ */
+
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#tray,
+#mode,
+#idle_inhibitor,
+#bluetooth,
+#custom-power,
+#custom-spotify,
+#custom-storage,
+#power-profiles-daemon {
+    padding: 0 8px;
+    margin: 0 2px;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+/* ============================================================================
+   CORES DOS MÓDULOS (Paleta Island)
+   ============================================================================ */
+
+#cpu {
+    color: #fb958b;
+}
+
+#memory {
+    color: #ebcb8b;
+}
+
+#custom-storage,
+#disk {
+    color: #efd6b9;
+}
+
+#pulseaudio,
+#wireplumber {
+    color: #7d9bba;
+}
+
+#network {
+    color: #b48ead;
+}
+
+#network.disconnected {
+    color: #f53c3c;
+}
+
+#bluetooth {
+    color: #707d9d;
+}
+
+#backlight {
+    color: #8fbcbb;
+}
+
+#custom-spotify {
+    color: #1db954;
+}
+
+#custom-power {
+    color: #f53c3c;
+    padding-right: 12px;
+}
+
+/* ============================================================================
+   BANDEJA (Tray)
+   ============================================================================ */
+
+#tray {
+    margin-right: 5px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+    opacity: 0.7;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
+    opacity: 1;
+}
+
+/* ============================================================================
+   ANIMAÇÕES
+   ============================================================================ */
+
+@keyframes blink {
+    from {
+        color: #f53c3c;
+    }
+    to {
+        color: #ffffff;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
